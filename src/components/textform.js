@@ -53,9 +53,9 @@ export default function TextForm(props) {
   return (
     <>
     <div>
-        <h1>{props.heading}</h1>
+      <h1 style={props.textformcolor}>Enter the text to analyse</h1>
             <div className="container mb-2">  
-            <textarea className="form-control" value={text} placeholder="Enter Text Here" id="Textarea" rows="8" onChange={handleOnChange}></textarea>
+            <textarea className="form-control" value={text} placeholder="Enter Text Here" id="Textarea" rows="8" onChange={handleOnChange} style={props.textareacolor}></textarea>
             </div>
             <div className='d-flex container justify-content-between '>
               <button className="btn btn-info" onClick={handleUpClick}>Convert To UPPERCASE</button>
@@ -68,10 +68,10 @@ export default function TextForm(props) {
             </div>  
     </div>
     <div className="container my-5">
-      <h1>Text Summary</h1>
-      <p><b>Letter:</b> {text.length}<br/><b>Words:</b> {text.split(" ").length}<br/><b>Minutes need to read it:</b> {0.008*text.split(" ").length}</p>
-      <h2>Preview</h2>
-      <p>{text}</p>
+      <h1  style={props.textformcolor}>Text Summary</h1>
+      <p  style={props.textformcolor}><b>Letter:</b> {text.length}<br/><b>Words:</b> {text.split(" ").length}<br/><b>Minutes need to read it:</b> {0.008*text.split(" ").length}</p>
+      <h2 style={props.textformcolor}>Preview</h2>
+      <p  style={props.textformcolor}>{text.length>0?text:"Enter text above to preview"}</p>
     </div>
     </>
   )
