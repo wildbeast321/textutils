@@ -16,6 +16,10 @@ function App() {
   const [textformcolor, settextformcolor] = useState({
     color: "black"
   });
+  const [borderstyle, setborderstyle] = useState({
+    color: 'black',
+    background: "rgb(248,249,250)",
+  });
   const [textareacolor, settextareacolor] = useState({
     background: "rgb(248,249,250)",
     color:"black"
@@ -23,7 +27,8 @@ function App() {
   });
   const [mystyle, setMyStyle] = useState({
     color: 'black',
-    background: "rgb(248,249,250)"
+    background: "rgb(248,249,250)",
+    
   })
   const [alert, setAlert] = useState(null);
   const showalert=(message,type)=>{
@@ -48,6 +53,10 @@ function App() {
         backgroundColor: "rgb(42,42,45)",
         border: "1px solid white"
     })
+    setborderstyle({
+      color: "white",
+      backgroundColor: "rgb(42,42,45)",
+    })
       showalert("Dark mode Has been enabled", "success")
     
     settextformcolor({
@@ -67,8 +76,12 @@ function App() {
       document.body.style.backgroundColor="rgb(255,255,255)";
       setMyStyle({
         color: "black",
-        backgroundColor: "rgb(255,255,255)",
-        border: "1px solid black"
+        backgroundColor: "rgb(248,249,250)",
+        
+    })
+      setborderstyle({
+      color: "black",
+      backgroundColor: "rgb(248,249,250)",
     })
     settextformcolor({
       color:"black"
@@ -91,7 +104,7 @@ function App() {
         <Alert alert={alert}/>
         <div className="container my-2">
           <Routes>
-            <Route exact path="/About" element={<About title="About Us" mystyle={mystyle}/>}/>
+            <Route exact path="/About" element={<About title="About Us" mystyle={mystyle} borderstyle={borderstyle}/>}/>
             <Route exact path="/" element={<TextForm showalert={showalert} heading="Enter the text to analyse" btncolor={btncolor} textformcolor={textformcolor} textareacolor={textareacolor}/>}/>
           </Routes>
         </div>
