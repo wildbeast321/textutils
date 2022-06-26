@@ -12,6 +12,7 @@ function App() {
   const [mode, setMode] = useState('light');
   const [navtext, setNavText] = useState("dark");
   const [textnav, settextnav] = useState("Light Mode");
+  const [btncolor, setbtncolor] = useState("info");
   const [textformcolor, settextformcolor] = useState({
     color: "black"
   });
@@ -56,6 +57,7 @@ function App() {
       backgroundColor: "black",
       color:"white"
     })
+    setbtncolor("danger")
 
     }
     else if (mode==="dark"){
@@ -76,7 +78,9 @@ function App() {
       color:"black"
     })
     showalert("Light mode Has been enabled", "success")
+    setbtncolor("info")
     }
+    
   }
  
  
@@ -85,7 +89,7 @@ function App() {
     <Navbar title="TextUtils" about="About" home="Home" mode={mode} toggleMode={toggleMode} navtext={navtext} textnav={textnav}/>
     <Alert alert={alert}/>
     <div className="container my-2">
-      <TextForm showalert={showalert} heading="Enter the text to analyse" textformcolor={textformcolor} textareacolor={textareacolor}/>
+      <TextForm showalert={showalert} heading="Enter the text to analyse" btncolor={btncolor} textformcolor={textformcolor} textareacolor={textareacolor}/>
     </div>
     <About title="About Us" mystyle={mystyle} />
     </>

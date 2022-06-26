@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 export default function TextForm(props) {
     const [text, setText]= useState("");
     const handleUpClick = ()=>{      
-      if(text===""){props.showalert("Cannot be left blank","danger")}
+      if(text===""){props.showalert("Cannot be left blank","warning")}
         else{
         let newtext=text.toUpperCase()
         setText(newtext)  
@@ -15,7 +15,7 @@ export default function TextForm(props) {
         setText(event.target.value)
     }
     const handleLowClick = ()=>{
-    if(text===""){props.showalert("Cannot be left blank","danger")}
+    if(text===""){props.showalert("Cannot be left blank","warning")}
     else{
       let rtext=text.toLowerCase()
       setText(rtext)
@@ -28,7 +28,7 @@ export default function TextForm(props) {
           
     }
     const handleTitleClick = ()=>{
-      if(text===""){props.showalert("Cannot be left blank","danger")}
+      if(text===""){props.showalert("Cannot be left blank","warning")}
       else{
       let str=text.split(" ")
       for (let i = 0; i < str.length; i++){
@@ -39,7 +39,7 @@ export default function TextForm(props) {
           } 
     }
     const handleInverseClick = ()=>{
-      if(text===""){props.showalert("Cannot be left blank","danger")}
+      if(text===""){props.showalert("Cannot be left blank","warning")}
       else{
       let str=text.split(" ")
       for (let i = 0; i < str.length; i++){  
@@ -59,7 +59,7 @@ export default function TextForm(props) {
           }
     }
     const handleReverseText = () => {
-      if(text===""){props.showalert("Cannot be left blank","danger")}
+      if(text===""){props.showalert("Cannot be left blank","warning")}
       else{
       let newText = text.split('').reverse().join('');
       setText(newText);
@@ -67,12 +67,22 @@ export default function TextForm(props) {
           }
     }
     const handleExtraSpaces=()=>{ 
-      if(text===""){props.showalert("Cannot be left blank","danger")}
+      if(text===""){props.showalert("Cannot be left blank","warning")}
       else{
       let newText= text.split(/[ ]+/)
       setText(newText.join(" "))
     props.showalert("Extra Spaces Removed","success")
           }
+    }
+    const handleword=(word)=>{
+      let htext= text;
+      if(htext===""){
+       word=0;
+      }
+      else if(htext.charAt(0)===" "){
+        word=text.split(" ").length-1
+      }
+      return word
     }
  
   return (
@@ -83,18 +93,18 @@ export default function TextForm(props) {
             <textarea className="form-control" value={text} placeholder="Enter Text Here" id="Textarea" rows="8" onChange={handleOnChange} style={props.textareacolor}></textarea>
             </div>
             <div className='d-flex container justify-content-between '>
-              <button className="btn btn-info" onClick={handleUpClick}>Convert To UPPERCASE</button>
-              <button className="btn btn-info" onClick={handleLowClick}> Convert To lowercase</button>
-              <button className="btn btn-info" onClick={handleTitleClick}>Convert to TitleCase</button>
-              <button className="btn btn-info" onClick={handleInverseClick}>Convert to InVeRsEcAsE</button>
-              <button className="btn btn-info" onClick={handleReverseText}>Convert to txeT esreveR</button>
-              <button className="btn btn-info" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-              <button className="btn btn-info" onClick={handleClearClick}>Clear Text</button> 
+              <button className={`btn btn-${props.btncolor}`} onClick={handleUpClick}>Convert To UPPERCASE</button>
+              <button className={`btn btn-${props.btncolor}`} onClick={handleLowClick}> Convert To lowercase</button>
+              <button className={`btn btn-${props.btncolor}`} onClick={handleTitleClick}>Convert to TitleCase</button>
+              <button className={`btn btn-${props.btncolor}`} onClick={handleInverseClick}>Convert to InVeRsEcAsE</button>
+              <button className={`btn btn-${props.btncolor}`} onClick={handleReverseText}>Convert to txeT esreveR</button>
+              <button className={`btn btn-${props.btncolor}`} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+              <button className={`btn btn-${props.btncolor}`} onClick={handleClearClick}>Clear Text</button> 
             </div>  
     </div>
     <div className="container my-5">
-      <h1  style={props.textformcolor}>Text Summary</h1>
-      <p  style={props.textformcolor}><b>Letter:</b> {text.length}<br/><b>Words:</b> {text.split(" ").length}<br/><b>Minutes need to read it:</b> {0.008*text.split(" ").length}</p>
+      <h1 style={props.textformcolor}>Text Summary</h1>
+      <p  style={props.textformcolor}><b>Letter:</b> {text.length}<br/><b>Words:</b> {handleword(text.split(" ").length)}<br/><b>Minutes need to read it:</b> {0.008*handleword(text.split(" ").length)}</p>
       <h2 style={props.textformcolor}>Preview</h2>
       <p  style={props.textformcolor}>{text.length>0?text:"Enter text above to preview"}</p>
     </div>
