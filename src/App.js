@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import TextForm from './components/Textform';
 import React, { useState } from 'react';
 import Alert from './components/Alert';
-
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 
@@ -86,12 +86,16 @@ function App() {
  
   return (
     <>
-    <Navbar title="TextUtils" about="About" home="Home" mode={mode} toggleMode={toggleMode} navtext={navtext} textnav={textnav}/>
-    <Alert alert={alert}/>
-    <div className="container my-2">
-      <TextForm showalert={showalert} heading="Enter the text to analyse" btncolor={btncolor} textformcolor={textformcolor} textareacolor={textareacolor}/>
-    </div>
-    <About title="About Us" mystyle={mystyle} />
+      <Router>
+        <Navbar title="TextUtils" about="About" home="Home" mode={mode} toggleMode={toggleMode} navtext={navtext} textnav={textnav}/>
+        <Alert alert={alert}/>
+        <div className="container my-2">
+          <Routes>
+            <Route exact path="/About" element={<About title="About Us" mystyle={mystyle}/>}/>
+            <Route exact path="/" element={<TextForm showalert={showalert} heading="Enter the text to analyse" btncolor={btncolor} textformcolor={textformcolor} textareacolor={textareacolor}/>}/>
+          </Routes>
+        </div>
+      </Router>
     </>
   );
   }
