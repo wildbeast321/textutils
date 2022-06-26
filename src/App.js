@@ -1,8 +1,11 @@
 import './App.css';
 import About from './components/About';
 import Navbar from './components/Navbar';
-import TextForm from './components/textform';
+import TextForm from './components/Textform';
 import React, { useState } from 'react';
+import Alert from './components/Alert';
+
+
 
 
 function App() {
@@ -21,6 +24,18 @@ function App() {
     color: 'black',
     background: "rgb(248,249,250)"
   })
+  const [alert, setAlert] = useState(null);
+  const showalert=(message,type)=>{
+    setAlert(
+      {
+        msg:message,
+        type: type
+      })
+    setTimeout(()=>{
+    setAlert(null)},2000
+        )
+    
+  }
   const toggleMode= ()=>{
     if(mode==="light"){
       setMode("dark")
@@ -32,6 +47,8 @@ function App() {
         backgroundColor: "rgb(42,42,45)",
         border: "1px solid white"
     })
+      showalert("Dark mode Has been enabled", "success")
+    
     settextformcolor({
       color:"white"
     })
@@ -58,14 +75,17 @@ function App() {
       background: "rgb(248,249,250)",
       color:"black"
     })
+    showalert("Light mode Has been enabled", "success")
     }
   }
+ 
  
   return (
     <>
     <Navbar title="TextUtils" about="About" home="Home" mode={mode} toggleMode={toggleMode} navtext={navtext} textnav={textnav}/>
+    <Alert alert={alert}/>
     <div className="container my-2">
-      <TextForm heading="Enter the text to analyse" textformcolor={textformcolor} textareacolor={textareacolor}/>
+      <TextForm showalert={showalert} heading="Enter the text to analyse" textformcolor={textformcolor} textareacolor={textareacolor}/>
     </div>
     <About title="About Us" mystyle={mystyle} />
     </>

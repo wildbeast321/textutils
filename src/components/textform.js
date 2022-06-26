@@ -4,28 +4,43 @@ import React, {useState} from 'react'
 export default function TextForm(props) {
     const [text, setText]= useState("");
     const handleUpClick = ()=>{      
+      if(text===""){props.showalert("Cannot be left blank","danger")}
+        else{
         let newtext=text.toUpperCase()
-        setText(newtext)
+        setText(newtext)  
+        props.showalert("Converted to UpperCase","success")
+      }
     }
     const handleOnChange = (event)=>{
         setText(event.target.value)
     }
     const handleLowClick = ()=>{
+    if(text===""){props.showalert("Cannot be left blank","danger")}
+    else{
       let rtext=text.toLowerCase()
       setText(rtext)
+      props.showalert("Converted to LowerCase","success")
+        }
     }
     const handleClearClick = ()=>{
       setText("")
+      props.showalert("TextArea Cleared","success")
+          
     }
     const handleTitleClick = ()=>{
+      if(text===""){props.showalert("Cannot be left blank","danger")}
+      else{
       let str=text.split(" ")
       for (let i = 0; i < str.length; i++){
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1).toLowerCase();
       }
       setText(str.join(" "))
-      
+      props.showalert("Converted to TitleCase","success")
+          } 
     }
     const handleInverseClick = ()=>{
+      if(text===""){props.showalert("Cannot be left blank","danger")}
+      else{
       let str=text.split(" ")
       for (let i = 0; i < str.length; i++){  
         let ptr=str[i].split("");
@@ -40,14 +55,24 @@ export default function TextForm(props) {
         str[i]=ptr.join("");
       }
       setText(str.join(" "))
+      props.showalert("Converted to Inverse Case","success")
+          }
     }
     const handleReverseText = () => {
+      if(text===""){props.showalert("Cannot be left blank","danger")}
+      else{
       let newText = text.split('').reverse().join('');
       setText(newText);
+      props.showalert("Text Reversed","success")
+          }
     }
-    const handleExtraSpaces=()=>{
+    const handleExtraSpaces=()=>{ 
+      if(text===""){props.showalert("Cannot be left blank","danger")}
+      else{
       let newText= text.split(/[ ]+/)
       setText(newText.join(" "))
+    props.showalert("Extra Spaces Removed","success")
+          }
     }
  
   return (
