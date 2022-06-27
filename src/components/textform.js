@@ -95,7 +95,7 @@ export default function TextForm(props) {
     </div>
     <div className="container my-5">
       <h1 style={props.textformcolor}>Text Summary</h1>
-      <p  style={props.textformcolor}><b>Letter:</b> {text.length}<br/><b>Words:</b> {text.split(" ").filter((element)=>{return element.length!==0}).length}<br/><b>Minutes need to read it:</b> {0.008*text.split(" ").filter((element)=>{return element.length!==0}).length}</p>
+      <p  style={props.textformcolor}><b>Letter:</b> {text.length}<br/><b>Words:</b> {text.split(/\s+/).filter((element)=>{return element.length!==0}).length}<br/><b>Minutes need to read it:</b> {0.008*text.split(/\s+/).filter((element)=>{return element.length!==0}).length}</p>
       <h2 style={props.textformcolor}>Preview</h2>
       <p  style={props.textformcolor}>{text.length>0?text:"Enter text above to preview"}</p>
     </div>
